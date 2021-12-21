@@ -3,6 +3,7 @@ let camera;
 let renderer;
 let scene;
 let figurine;
+let controls;
 
 function init() {
   container = document.getElementById('container');
@@ -28,6 +29,8 @@ function init() {
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
 
+  controls = new THREE.OrbitControls (camera, renderer.domElement);
+
   container.appendChild(renderer.domElement);
 
   const loader = new THREE.GLTFLoader();
@@ -50,6 +53,7 @@ function onWindowResize() {
 function animate() {
   requestAnimationFrame(animate);
   figurine.rotation.z += 0.005;
+  controls.update();
   renderer.render(scene, camera);
 }
 
